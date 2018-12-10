@@ -9,6 +9,7 @@
     "start": "node start.js"
   },
   "dependencies": {
+    "babel-register": "^6.26.0",
     "body-parser": "^1.12.3",
     "connect-redis": "^3.3.3",
     "cookie-parser": "^1.4.3",
@@ -25,8 +26,7 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "babel-preset-env": "^1.7.0"
   },
   "jshintConfig": {
     "esversion": 6
