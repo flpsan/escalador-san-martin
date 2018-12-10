@@ -1,0 +1,33 @@
+doctype html
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
+head
+
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet')
+    link(href='/css/styles.less', rel='stylesheet/less', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet')
+
+    script(src='/js/libs/jquery-3.1.1.min.js')
+    script(src='/js/libs/less.min.js')
+    script(src='/js/escalador.js')
+
+    block scripts
+
+body
+    #overlay Aguarde...
+    .layout
+        .menu
+            .conteudo-menu
+                .menu-item 
+                    a(href='/app') Início
+                .menu-item 
+                    a(href='/app/conta-cartola') Contas do Cartola
+                .menu-item 
+                    a(href='/auth/logout') Logout
+                .menu-item.botao-hide-menu
+                    a(href='javascript:menu.hide()') Esconder menu
+        .geral
+            .topo 
+                .topo-conteudo 
+                    h1 !{titulo}
+            .conteudo
+                block conteudo

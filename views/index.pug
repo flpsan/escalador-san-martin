@@ -1,0 +1,55 @@
+extends layout
+
+block conteudo
+    section.section-padrao.campinho-section
+        .campinho(esquema=`${escalacao.esquema}`)
+            each atleta in escalacao.atletas
+                .atleta-campinho(posicao_id=`${atleta.posicao_id}`, atleta_id=`${atleta.atleta_id}`) 
+                    .capitao(onclick=`escalador.capitao(${atleta.atleta_id})`) C
+                    .inner-atleta(onclick=`escalador.removerAtleta(${atleta.atleta_id})`)
+                        .nome !{atleta.apelido}
+        .botoes
+            button(type='button' value='Limpar' onclick='escalador.limpar()') Limpar
+            select#esquema(onchange='escalador.alterarEsquema()')
+                each esquema in esquemas
+                    option(selected=escalacao.esquema==`${esquema}`) !{esquema} 
+            button(type='button' onclick='escalador.escalar()') Escalar
+
+
+    section.section-padrao.filtro-section.form(action='')
+        form     
+            h2 Filtro
+            fieldset
+                input#nome(type='text' name='nome' value=filtro.nome?`${filtro.nome}`:'' placeholder='Nome do jogador')
+            fieldset
+                legend Clubes
+                .clubes
+                    each clube in clubes
+                        - var checked = typeof filtro.clube_id === 'object' && filtro.clube_id.indexOf(clube.id.toString()) !== -1
+                        - var inputId = `check_${clube.id}`
+                        .clube                            
+                            input(id=inputId  type='checkbox' name='clube_id[]' value=clube.id checked=checked)
+                            label(for=inputId) #{clube.nome}
+            fieldset
+                legend Status
+                .statuses
+                    each _status in status
+                        - var checked = typeof filtro.status_id === 'object' && filtro.status_id.indexOf(_status.id.toString()) !== -1
+                        - var inputId = `check_${_status.id}`
+                        .status                            
+                            input(id=inputId type='checkbox' name='status_id[]' value=_status.id checked=checked)
+                            label(for=inputId) #{_status.nome}
+            .botoes
+                button(type='button' onclick='filtro.limpar()') Limpar
+                button(type='submit') Filtrar
+
+
+    section.section-padrao.atletas-section 
+        each atleta in atletas
+            .section-elemento.atleta
+                .col.col1 
+                    .nome !{atleta.apelido} 
+                    .clube !{atleta.posicao} 
+                .col.col2 !{atleta.clube}
+                .col.col3 
+                    button(type='button' onclick=`escalador.escalarAtleta(${atleta.atleta_id}, ${atleta.posicao_id})`) Escalar

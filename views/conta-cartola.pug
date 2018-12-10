@@ -1,0 +1,31 @@
+extends layout
+
+block conteudo
+    section.section-padrao.conta-cartola-section
+        h2 Suas Contas
+        - let temContas = typeof contasCartola === 'object' && contasCartola.length > 0
+        if temContas
+            each contaCartola in contasCartola
+                .section-elemento.conta-cartola
+                    .col.col1 !{contaCartola.email}
+                    .col.col2.col-senha.mascarado(onclick=`$(this).toggleClass('mascarado')`) !{contaCartola.senha}
+                    .col.col3 
+                        button(type='button' onclick=`contaCartola.remover('${contaCartola.id}')`)  Remover
+        else
+            .section-elemento.conta-cartola
+                span Nenhuma conta cadastrada
+        .botoes
+            if temContas
+                button(type='button' onclick='contaCartola.limpar()') Remover todas contas
+            button#btnIncluirContaCartola(type='button' onclick='contaCartola.incluir()') Incluir conta
+    section.section-padrao.incluir-conta-cartola-section
+        form
+            h2 Incluir Conta
+            .formulario
+                .col
+                    input(id='email' type='text' maxlength=80 placeholder='Login do Cartola')
+                .col
+                    input(id='senha' type='password' maxlength=70 placeholder='Senha do Cartola')
+            .botoes
+                button(type='reset') Limpar
+                button(type='button' onclick='contaCartola.incluir()') Incluir

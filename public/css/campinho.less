@@ -1,0 +1,146 @@
+@larguraCampinho: 290px;
+@alturaCampinho: @larguraCampinho * 1.2;
+@larguraAtleta: 20%;
+.esquerda { left: 0%; }
+.esquerda2 { left: 25%; }
+.esquerda3 { left: 20%; }
+.direita { right: 0%; }
+.direita2 { right: 25%; }
+.direita3 { right: 20%; }
+.meio { left: 48.5% - @larguraAtleta/2; }
+.alinhamento-horizontal-base { bottom: 0%; }
+.alinhamento-horizontal-zagueiros-laterais { bottom: 25%; }
+.alinhamento-horizontal-zagueiros-laterais-mais-embaixo { bottom: 20%; }
+.alinhamento-horizontal-zagueiros-laterais-mais-emcima { bottom: 30%; }
+.alinhamento-horizontal-meias { top: 25%; }
+.alinhamento-horizontal-meias-mais-embaixo { top: 38%; }
+.alinhamento-horizontal-meias-mais-emcima { top: 20%; }
+.alinhamento-horizontal-atacantes { top: 0%; }
+
+.campinho-section {
+    .align-center;
+    .campinho {
+        width: @larguraCampinho;
+        height: @alturaCampinho;
+        background-color: green;
+        position: relative;
+    }
+}
+
+.atleta-campinho {
+    &:hover { background-color: red; }
+    position: absolute;
+    width: @larguraAtleta;
+    height: @larguraAtleta * .85;
+    margin: 5px;    
+    border-radius: 50%;    
+    text-transform: uppercase;
+    font-size: 0.033 * @larguraCampinho;
+    font-weight: bold;
+    background-color: #CDDC39;
+    .shadow;
+        
+    .inner-atleta {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        .flex; .align-center;
+        .clicavel;
+        .nome {
+            width: 100%; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }    
+    }
+    .capitao {
+        .shadow;
+        &:hover { background-color: yellow; }
+        &.capitao-selecionado { background-color: rgb(165, 181, 26); }
+        .clicavel;
+        position: absolute;
+        top: -7px; right: -7px;
+        width: 20px; height: 20px;
+        padding: 2px;
+        border-radius: 50%;
+        background-color: #CDDC39;        
+        text-align: center;
+    }
+}
+
+//Goleiro
+.atleta-campinho[posicao_id='1'] { 
+    .alinhamento-horizontal-base; .meio;
+}
+
+ //Lateral
+.atleta-campinho[posicao_id='2'] { 
+    .alinhamento-horizontal-zagueiros-laterais;
+}
+.atleta-campinho[posicao_id='2']:nth-of-type(2n) { .esquerda }
+.atleta-campinho[posicao_id='2']:nth-of-type(2n + 1) { .direita }
+
+//Zagueiro
+.atleta-campinho[posicao_id='3'] { 
+    .alinhamento-horizontal-zagueiros-laterais;
+}
+.campinho[esquema^='3-'] {
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n) { .esquerda; }
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n + 1) { .meio; }
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n + 2) { .direita; }
+}
+.campinho[esquema^='4-'] {
+    .atleta-campinho[posicao_id='3']:nth-of-type(2n) { .esquerda2; }
+    .atleta-campinho[posicao_id='3']:nth-of-type(2n + 1) { .direita2; }
+}
+.campinho[esquema^='5-'] {
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n) { .esquerda3; .alinhamento-horizontal-zagueiros-laterais-mais-embaixo; }
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n + 1) { .meio; }
+    .atleta-campinho[posicao_id='3']:nth-of-type(3n + 2) { .direita3; .alinhamento-horizontal-zagueiros-laterais-mais-embaixo; }
+    .atleta-campinho[posicao_id='2']:nth-of-type(2n) { .alinhamento-horizontal-zagueiros-laterais-mais-emcima; }
+    .atleta-campinho[posicao_id='2']:nth-of-type(2n + 1) { .alinhamento-horizontal-zagueiros-laterais-mais-emcima; }
+}
+
+//Meia
+.atleta-campinho[posicao_id='4'] { 
+    .alinhamento-horizontal-meias;
+}
+.campinho[esquema*='-5-'] {
+    .atleta-campinho[posicao_id='4']:nth-of-type(5n) { .esquerda; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(5n + 1) { .esquerda2;  .alinhamento-horizontal-meias-mais-embaixo; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(5n + 2) { .meio; .alinhamento-horizontal-meias-mais-emcima; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(5n + 3) { .direita2; .alinhamento-horizontal-meias-mais-embaixo; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(5n + 4) { .direita; }
+}
+.campinho[esquema*='-4-'] {
+    .atleta-campinho[posicao_id='4']:nth-of-type(4n) { .esquerda; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(4n + 1) { .esquerda2; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(4n + 2) { .direita2; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(4n + 3) { .direita; }
+}
+.campinho[esquema*='-3-'] {
+    .atleta-campinho[posicao_id='4']:nth-of-type(3n) { .esquerda; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(3n + 1) { .meio; }
+    .atleta-campinho[posicao_id='4']:nth-of-type(3n + 2) { .direita; }
+}
+
+//Atacante
+.atleta-campinho[posicao_id='5'] { 
+    .alinhamento-horizontal-atacantes;
+}
+.campinho[esquema$='-1'] {
+    .atleta-campinho[posicao_id='5'] { .meio; }
+}
+.campinho[esquema$='-2'] {
+    .atleta-campinho[posicao_id='5']:nth-of-type(2n) { .esquerda3; }
+    .atleta-campinho[posicao_id='5']:nth-of-type(2n + 1) { .direita3; }
+}
+.campinho[esquema$='-3'] {
+    .atleta-campinho[posicao_id='5']:nth-of-type(3n) { .esquerda; }
+    .atleta-campinho[posicao_id='5']:nth-of-type(3n + 1) { .meio; }
+    .atleta-campinho[posicao_id='5']:nth-of-type(3n + 2) { .direita; }
+}
+
+//Técnico
+.atleta-campinho[posicao_id='6'] { 
+    .alinhamento-horizontal-base;
+} 

@@ -1,0 +1,19 @@
+
+.conta-cartola-section {
+    .conta-cartola {
+        .col {
+            &.col1 { flex-basis: 42%; word-break: break-all; }
+            &.col2 { flex-basis: 30%; word-break: break-all; }
+            &.col3 { flex-basis: 28%; text-align: right; }
+            &.col-senha { cursor: pointer; }
+            &.mascarado { 
+                position: relative; color: transparent;
+                &:after { position: absolute; color: gray; font-weight: bold; font-size: 11px; content: 'revelar senha'; left: 0;  }
+            }
+        }
+    }
+}
+
+.incluir-conta-cartola-section {
+    display: none;
+}
