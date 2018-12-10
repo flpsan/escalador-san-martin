@@ -1,0 +1,11 @@
+front-end
+	slick-carousel
+	storybook: criação de componentes react
+	material-ui: componentes react prontos
+	react-infinite-scroller
+	react-sidebar
+	create-react-app
+
+back-end
+	dumper
+	loadash: útilitários para trablahar com arrays, collections, etc
