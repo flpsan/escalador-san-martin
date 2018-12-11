@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const redis = require('connect-redis');
 const session = require('express-session');
-const passport = require("passport");
+const passport = require('passport');
 const router = require('./routes').router;
 const db = require('./helpers/db');
 
