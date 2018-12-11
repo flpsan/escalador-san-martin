@@ -13,6 +13,7 @@ router.use('/usuario', usuarioRouter);
 router.use('/atletas', atletasRouter);
 router.use('/escalador', escaladorRouter);
 router.use('/app', appRouter);
+router.get('/', (req, res) => res.redirect('/app'));
 
 router.use((err, req, res, next) => {
     if ('name' in err) {
