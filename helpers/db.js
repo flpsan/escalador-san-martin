@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
-const uri = process.env.isDev ? 
-    'mongodb://localhost:27017/san-martin' : 
-    'mongodb://flpsan:um2345678@ds145289.mlab.com:45289/escalador-san-martin';
+let uri = 'mongodb://flpsan:um2345678@ds145289.mlab.com:45289/escalador-san-martin';
+if (process.env.isDev) {
+    uri = 'mongodb://localhost:27017/san-martin';
+}
+
 const options = { useNewUrlParser: true };
+
+console.log(uri);
 
 exports.start = () => {
     mongoose.connect(uri, options).then(
-        () => { console.log('conectado com sucesso'); },
-        err => console.log('erro de conexão')
+        () => { console.log('Conectado com sucesso no Mongo.'); },
+        err => console.log('Erro de conexão com o Mongo.')
     );
 };
