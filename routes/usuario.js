@@ -1,7 +1,8 @@
-import express from 'express';
-import * as usuarioModel from '../models/usuario';
-import * as contaCartolaModel from '../models/conta-cartola';
-import { logado } from '../middlewares';
+const express = require('express');
+const usuarioModel = require('../models/usuario');
+const contaCartolaModel = require('../models/conta-cartola');
+const middlewares = require('../middlewares');
+const logado = middlewares.logado;
 
 const router = express.Router();
 
@@ -33,4 +34,4 @@ router.post('/conta-cartola/limpar', logado, (req, res, next) => {
     });
 });
 
-export { router };
+exports.router = router;

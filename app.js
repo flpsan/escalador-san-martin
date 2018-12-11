@@ -1,11 +1,11 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import redis from 'connect-redis';
-import session from 'express-session';
-import passport from "passport";
-import { router } from './routes';
-import * as db from './helpers/db';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const redis = require('connect-redis');
+const session = require('express-session');
+const passport = require("passport");
+const router = require('./routes').router;
+const db = require('./helpers/db');
 
 const app = express();
 app.set('view engine', 'pug');

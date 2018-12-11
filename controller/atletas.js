@@ -1,7 +1,7 @@
-import https from 'https';
-import moment from 'moment';
-import { ParametroInvalidoError } from '../helpers/sanmartinerror';
-import _ from 'lodash';
+const https = require('https');
+const moment = require('moment');
+const { ParametroInvalidoError } = require('../helpers/sanmartinerror');
+const _ = require('lodash');
 
 let cartola = {
     moment: null,
@@ -47,7 +47,7 @@ function fillInfo(atletas) {
     });
 }
 
-const updateAtletas = (cb) => {  
+exports.updateAtletas = (cb) => {  
     let callApi = false;
     let now = moment();
     if (cartola.moment == null) {
@@ -101,7 +101,7 @@ function chamarApi(cb) {
  * @param {Object[]} [atletas] - Lista original de atletas que será filtrada. Opcional.
  * for
  */
-const filtrar = (params, atletas) => {
+exports.filtrar = (params, atletas) => {
     atletas = atletas || cartola.jsonmercado.atletasFilled;
     return  _.filter(atletas, atleta => {
         let atendeAosFiltros = [];
@@ -169,8 +169,6 @@ const filtrar = (params, atletas) => {
     });
 };
 
-let getTodosAtletas = () => cartola.jsonmercado.atletas;
-let getClubes = () => cartola.jsonmercado.clubes;
-let getStatus = () => cartola.jsonmercado.status;
-
-export { filtrar, updateAtletas, getTodosAtletas, getClubes, getStatus };
+exports.getTodosAtletas = () => cartola.jsonmercado.atletas;
+exports.getClubes = () => cartola.jsonmercado.clubes;
+exports.getStatus = () => cartola.jsonmercado.status;

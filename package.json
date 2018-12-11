@@ -6,10 +6,9 @@
   "author": "Felipe San Martin",
   "license": "MIT",
   "scripts": {
-    "start": "node start.js"
+    "start": "node ./app.js"
   },
   "dependencies": {
-    "babel-register": "^6.26.0",
     "body-parser": "^1.12.3",
     "connect-redis": "^3.3.3",
     "cookie-parser": "^1.4.3",
@@ -24,9 +23,6 @@
     "passport": "^0.2.2",
     "passport-google-oauth": "^1.0.0",
     "pug": "^2.0.3"
-  },
-  "devDependencies": {
-    "babel-preset-env": "^1.7.0"
   },
   "jshintConfig": {
     "esversion": 6

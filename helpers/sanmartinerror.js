@@ -1,6 +1,6 @@
-import { BaseError } from 'make-error';
+const { BaseError } = require('make-error');
 
-export class SanMartinError extends BaseError {
+const SanMartinError = class extends BaseError {
     constructor(log = 'Erro genérico.', message = 'Falha de comunicação.', innerErr = undefined) {
       if (innerErr instanceof Error) {
         log = innerErr.message;
@@ -49,7 +49,9 @@ export class SanMartinError extends BaseError {
     }
 }
 
-export class UsuarioNaoEncontradoError extends SanMartinError {
+exports.SanMartinError = SanMartinError;
+
+exports.UsuarioNaoEncontradoError = class extends SanMartinError {
   constructor(email) {
     super(`Usuário ${email} não encontrado`, `Usuário ${email} não encontrado`);
     this.subName = 'UsuarioNaoEncontradoError';
@@ -57,7 +59,7 @@ export class UsuarioNaoEncontradoError extends SanMartinError {
   }
 }
 
-export class DeveEstarLogadoError extends SanMartinError {
+exports.DeveEstarLogadoError = class extends SanMartinError {
   constructor() {
     super('Faça login para realizar esta operação.', 'Faça login para realizar esta operação.');
     this.subName = 'DeveEstarLogadoError';
@@ -65,7 +67,7 @@ export class DeveEstarLogadoError extends SanMartinError {
   }
 }
 
-export class ContaCartolaJaExisteError extends SanMartinError {
+exports.ContaCartolaJaExisteError = class extends SanMartinError {
   constructor(email) {
     super(`A conta ${email} já existe`, `A conta ${email} já existe`);
     this.subName = 'ContaCartolaJaExisteError';
@@ -73,7 +75,7 @@ export class ContaCartolaJaExisteError extends SanMartinError {
   }
 }
 
-export class ContaCartolaNaoExisteError extends SanMartinError {
+exports.ContaCartolaNaoExisteError = class extends SanMartinError {
   constructor(email) {
     super(`A conta ${email} não existe`, `A conta ${email} não existe`);
     this.subName = 'ContaCartolaNaoExisteError';
@@ -81,7 +83,7 @@ export class ContaCartolaNaoExisteError extends SanMartinError {
   }
 }
 
-export class ParametroInvalidoError extends SanMartinError {
+exports.ParametroInvalidoError = class extends SanMartinError {
   constructor(parametro) {
     super(`Parâmetro inválido: ${parametro}`, `Parâmetro inválido: ${parametro}`);
     this.subName = 'ParametroInvalidoError';
@@ -89,7 +91,7 @@ export class ParametroInvalidoError extends SanMartinError {
   }
 }
 
-export class CartolaError extends SanMartinError {
+exports.exports = class extends SanMartinError {
   constructor(parametro) {
     super(`Cartola Error: ${parametro}`, `Cartola Error: ${parametro}`);
     this.subName = 'CartolaError';

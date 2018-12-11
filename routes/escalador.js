@@ -1,7 +1,8 @@
-import express from 'express';
-import { logado } from '../middlewares';
-import * as escalacaoModel from '../models/escalacao';
-import * as EscalacaoController from '../controller/escalador';
+const express = require('express');
+const middlewares = require('../middlewares');
+const logado = middlewares.logado;
+const escalacaoModel = require('../models/escalacao');
+const EscalacaoController = require('../controller/escalador');
 
 const router = express.Router();
 
@@ -71,4 +72,4 @@ router.post('/escalar', logado, (req, res, next) => {
     });
 });
 
-export { router };
+exports.router = router;

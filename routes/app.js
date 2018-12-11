@@ -1,10 +1,11 @@
-import express from 'express';
-import * as UsuarioController from '../controller/usuario';
-import * as AtletasController from '../controller/atletas';
-import * as EscaladorController from '../controller/escalador';
-import { logado } from '../middlewares';
-import * as helpers from '../helpers';
-import * as constantes from '../helpers/constantes';
+const express = require('express');
+const UsuarioController = require('../controller/usuario');
+const AtletasController = require('../controller/atletas');
+const EscaladorController = require('../controller/escalador');
+const middlewares = require('../middlewares');
+const logado = middlewares.logado;
+const helpers = require('../helpers');
+const constantes = require('../helpers/constantes');
 
 const router = express.Router();
 
@@ -36,4 +37,4 @@ router.get('/conta-cartola', logado, (req, res, next) => {
     });    
 });
 
-export { router };
+exports.router = router;

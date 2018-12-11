@@ -1,16 +1,16 @@
-import https from 'https';
-import moment from 'moment';
-import * as escalacaoModel from '../models/escalacao';
-import {
+const https = require('https');
+const moment = require('moment');
+const escalacaoModel = require('../models/escalacao');
+const {
     CartolaError, SanMartinError
-} from '../helpers/sanmartinerror';
+} = require('../helpers/sanmartinerror');
 
 let requestId = 0;
 let requestControl = [];
 const LOGIN = 1;
 const ESCALAR = 2;
 
-function escalarTime(email, senha, jsonEscalacao, cb) {
+const escalarTime = (email, senha, jsonEscalacao, cb) => {
     function gerarOptions(tipo, xglbToken) {
         let options = {
             'port': 443,
@@ -116,11 +116,13 @@ function loop(requestId, i, cb) {
     }
 }
 
+
 const obter = (userId, cb) => {
     return escalacaoModel.obter(userId, cb);
 };
+exports.obter = obter;
 
-const escalar = (escalacao, contas, cb) => {
+exports.escalar = (escalacao, contas, cb) => {
     requestId++;
     console.log('requestId start', requestId, 'escalacao', escalacao, 'contas', contas);
 
@@ -129,21 +131,14 @@ const escalar = (escalacao, contas, cb) => {
     return loop(requestId, 0, cb);
 };
 
-const removerAtleta = (userId, atletaId, cb) => {
+exports.removerAtleta = (userId, atletaId, cb) => {
     return escalacaoModel.Escalacao.update({'usuarioId': userId}, {$pull: { atletas: {'atleta_id': atletaId }}}, {'multi': false}, cb);
 };
 
-const capitao = (userId, atletaId, cb) => {
+exports.capitao = (userId, atletaId, cb) => {
     obter(userId, (err, escalacao) => {
         if (err) return cb(err);
         escalacao.set('capitao', atletaId);
         return escalacaoModel.salvar(escalacao, cb);
     });
-};
-
-export {
-    obter,
-    escalar,
-    removerAtleta,
-    capitao
 };

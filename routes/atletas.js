@@ -1,6 +1,6 @@
-import express from 'express';
-import { logado } from '../middlewares';
-import * as AtletasController from '../controller/atletas';
+const express = require('express');
+const { logado } = require('../middlewares');
+const AtletasController = require('../controller/atletas').AtletasController;
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.get('/', logado, (req, res) => {
     });
 });
 
-export { router };
+exports.router = router;

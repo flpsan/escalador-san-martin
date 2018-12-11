@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import { UsuarioNaoEncontradoError, ContaCartolaJaExisteError, ContaCartolaNaoExisteError } from '../helpers/sanmartinerror';
-import { contaCartolaSchema } from '../models/conta-cartola';
+const mongoose = require('mongoose');
+const { UsuarioNaoEncontradoError, ContaCartolaJaExisteError, ContaCartolaNaoExisteError } = require('../helpers/sanmartinerror');
+const { contaCartolaSchema } = require('../models/conta-cartola');
 
 const usuarioSchema = new mongoose.Schema({
     id: { type: String, required: true },
@@ -14,10 +14,10 @@ const usuarioSchema = new mongoose.Schema({
     contasCartola: { type: [contaCartolaSchema] }
 });
 
-export const Usuario = mongoose.model('Usuario', usuarioSchema);
+exports.Usuario = mongoose.model('Usuario', usuarioSchema);
 
-export function obterOuCriar(usuario, cb) {
-    Usuario.findOne({ email: usuario.email }, (err, usuario0) => {
+exports.obterOuCriar = (usuario, cb) => {
+    exports.Usuario.findOne({ email: usuario.email }, (err, usuario0) => {
         if (err) cb(err);
         var dateNow = new Date().toISOString();
         if (usuario0 === null) { //Não existe, pode criar
@@ -29,8 +29,8 @@ export function obterOuCriar(usuario, cb) {
     });
 }
 
-export function obter(email, cb) {
-    Usuario.findOne({ email: email }, (err, usuario) => {
+exports.obter = (email, cb) => {
+    exports.Usuario.findOne({ email: email }, (err, usuario) => {
         if (err) cb(err);
         if (usuario === null) {
             return cb(new UsuarioNaoEncontradoError(email));
@@ -39,8 +39,8 @@ export function obter(email, cb) {
     });
 }
 
-export function adicionarContaCartola(email, contaCartola, cb) {
-    Usuario.findOne({ email: email }, (err, usuario) => {
+exports.adicionarContaCartola = (email, contaCartola, cb) => {
+    exports.Usuario.findOne({ email: email }, (err, usuario) => {
         if (err) cb(err);
         if (usuario === null) {
             return cb(new UsuarioNaoEncontradoError(email));
@@ -53,8 +53,8 @@ export function adicionarContaCartola(email, contaCartola, cb) {
     });
 }
 
-export function removerContaCartola(email, idContaCartola, cb) {
-    Usuario.findOne({ email: email }, (err, usuario) => {
+exports.removerContaCartola = (email, idContaCartola, cb) => {
+    exports.Usuario.findOne({ email: email }, (err, usuario) => {
         if (err) cb(err);
         if (usuario === null) {
             return cb(new UsuarioNaoEncontradoError(email));
@@ -68,8 +68,8 @@ export function removerContaCartola(email, idContaCartola, cb) {
     });
 }
 
-export function limparContasCartola(email, cb) {
-    Usuario.findOne({ email: email }, (err, usuario) => {
+exports.limparContasCartola = (email, cb) => {
+    exports.Usuario.findOne({ email: email }, (err, usuario) => {
         if (err) cb(err);
         if (usuario === null) {
             return cb(new UsuarioNaoEncontradoError(email));

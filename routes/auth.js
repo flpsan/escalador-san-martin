@@ -1,7 +1,7 @@
-import express from 'express';
-import passport from "passport";
-import passportGoogleOauth from 'passport-google-oauth';
-import * as UsuarioController from '../controller/usuario';
+const express = require('express');
+const passport = require('passport');
+const passportGoogleOauth = require('passport-google-oauth');
+const UsuarioController = require('../controller/usuario');
 
 const router = express.Router();
 
@@ -47,4 +47,4 @@ router.get('/logout', (req, res) => {
     res.redirect('/app');
 });
 
-export { router };
+exports.router = router;

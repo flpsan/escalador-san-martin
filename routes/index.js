@@ -1,10 +1,10 @@
-import express from 'express';
-import { router as authRouter } from './auth';
-import { router as usuarioRouter } from './usuario';
-import { router as atletasRouter } from './atletas';
-import { router as escaladorRouter } from './escalador';
-import { router as appRouter } from './app';
-import { SanMartinError } from '../helpers/sanmartinerror';
+const express = require('express');
+const authRouter = require('./auth').router;
+const usuarioRouter = require('./usuario').router;
+const atletasRouter = require('./atletas').router;
+const escaladorRouter = require('./escalador').router;
+const appRouter = require('./app').router;
+const SanMartinError = require('../helpers/sanmartinerror').SanMartinError;
 
 const router = express.Router();
 
@@ -26,4 +26,4 @@ router.use((err, req, res, next) => {
     return res.status(err.httpStatusCode || 500).send(err.message);
 });
 
-export { router };
+exports.router = router;

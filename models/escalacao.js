@@ -1,8 +1,6 @@
-import mongoose from 'mongoose';
-import _ from 'lodash';
-import {
-    ESQUEMAS_DETALHADOS
-} from '../helpers/constantes';
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const { ESQUEMAS_DETALHADOS } = require('../helpers/constantes');
 
 const posicoes = {
     1: {
@@ -37,7 +35,7 @@ const posicoes = {
     }
 };
 
-export const escalacaoSchema = new mongoose.Schema({
+const escalacaoSchema = new mongoose.Schema({
     usuarioId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -112,12 +110,14 @@ export const escalacaoSchema = new mongoose.Schema({
         validate: {
             validator: (atletaId) => {
                 console.log(this.atletas);
-                return false;
+                return true;
             },
             msg: 'ISH'
         }
     }
 });
+
+exports.escalacaoSchema = escalacaoSchema;
 
 function contarPosicoes(self) {
     let qtdPosicoes = {
@@ -158,14 +158,14 @@ escalacaoSchema.virtual('tecnicos').get(function () {
     return contarPosicoes(this)[6];
 });
 
-export const Escalacao = mongoose.model('Escalacao', escalacaoSchema);
+exports.Escalacao = mongoose.model('Escalacao', escalacaoSchema);
 
-export function salvar(escalacao, cb) {
+exports.salvar = (escalacao, cb) => {
     return escalacao.save(cb);
 }
 
-export function obter(usuarioId, cb) {
-    Escalacao.findOne({
+exports.obter = (usuarioId, cb) => {
+    exports.Escalacao.findOne({
         usuarioId: usuarioId
     }, (err, escalacao) => {
         if (err) return cb(err);
