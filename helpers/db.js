@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-let uri = 'mongodb://flpsan:um2345678@ds145289.mlab.com:45289/escalador-san-martin';
-if (process.env.isDev) {
-    uri = 'mongodb://localhost:27017/san-martin';
+let uri = 'mongodb://localhost:27017/san-martin';
+if ('NODE_ENV' in process.env && process.env.NODE_ENV == 'production') {
+    uri = 'mongodb://flpsan:um2345678@ds145289.mlab.com:45289/escalador-san-martin';
 }
 
 const options = { useNewUrlParser: true };

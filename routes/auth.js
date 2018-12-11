@@ -5,9 +5,9 @@ const UsuarioController = require('../controller/usuario');
 
 const router = express.Router();
 
-let callbackUrl = 'https://escalador-san-martin.herokuapp.com/auth/google/callback';
-if (process.env.isDev) {
-  callbackUrl = 'http://localhost/auth/google/callback';
+let callbackUrl = 'http://localhost/auth/google/callback';
+if ('NODE_ENV' in process.env && process.env.NODE_ENV == 'production') {
+  callbackUrl = 'https://escalador-san-martin.herokuapp.com/auth/google/callback';
 }
 console.log(callbackUrl);
 

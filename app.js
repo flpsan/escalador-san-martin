@@ -20,9 +20,12 @@ app.use(cookieParser('TESTE SECRET'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var redisStoreOptions = process.env.isDev ? 
-    { host: 'localhost', port: 6379, disableTTL: true } : 
-    { host: 'redis-11956.c90.us-east-1-3.ec2.cloud.redislabs.com', port: 11956, disableTTL: true, pass: 'um2345678' };
+let redisStoreOptions = { host: 'localhost', port: 6379, disableTTL: true };
+if ('NODE_ENV' in process.env && process.env.NODE_ENV == 'production') {
+    redisStoreOptions = { host: 'redis-11956.c90.us-east-1-3.ec2.cloud.redislabs.com', port: 11956, disableTTL: true, pass: 'um2345678' };
+}
+
+console.log(redisStoreOptions);
 
 app.use(session({
     store: new RedisStore(redisStoreOptions),
