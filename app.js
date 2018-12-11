@@ -16,7 +16,7 @@ app.use(cookieParser('TESTE SECRET'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-    store: new RedisStore({ host: 'localhost', port: 6379, disableTTL: true }),
+    store: new RedisStore({ host: 'redis-11956.c90.us-east-1-3.ec2.cloud.redislabs.com', port: 11956, disableTTL: true, pass: 'um2345678' }),
     saveUninitialized: true,
     resave: false,
     secret: 'TESTE SECRET',
@@ -28,7 +28,7 @@ app.use(router);
 
 app.set('view engine', 'pug');
 
-let porta = process.env.PORT || 3000;
+let porta = process.env.PORT || 80;
 app.listen(porta, () => {
     console.log(`Listening on port ${porta}`);
     db.start();

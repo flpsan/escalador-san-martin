@@ -158,7 +158,8 @@ escalacaoSchema.virtual('tecnicos').get(function () {
     return contarPosicoes(this)[6];
 });
 
-exports.Escalacao = mongoose.model('Escalacao', escalacaoSchema);
+const Escalacao = mongoose.model('Escalacao', escalacaoSchema);
+exports.Escalacao = Escalacao;
 
 exports.salvar = (escalacao, cb) => {
     return escalacao.save(cb);

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = 'mongodb://localhost:27017/san-martin';
+const uri = 'mongodb://flpsan:um2345678@ds145289.mlab.com:45289/escalador-san-martin';
 const options = { useNewUrlParser: true };
 
 exports.start = () => {

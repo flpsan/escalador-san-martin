@@ -11,7 +11,7 @@ const GOOGLE_CLIENT_SECRET = 'yAUxU8EOLmd2y4Cei2mDyeBC';
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:3000/auth/google/callback`
+    callbackURL: `https://escalador-san-martin.herokuapp.com/auth/google/callback`
   },
   function(_, __, profile, done) {
     let usuario = new UsuarioController.Usuario({
