@@ -5,13 +5,19 @@ const UsuarioController = require('../controller/usuario');
 
 const router = express.Router();
 
+let callbackUrl = 'https://escalador-san-martin.herokuapp.com/auth/google/callback';
+if (process.env.isDev) {
+  callbackUrl = 'http://localhost/auth/google/callback';
+}
+console.log(callbackUrl);
+
 const GoogleStrategy = passportGoogleOauth.OAuth2Strategy;
 const GOOGLE_CLIENT_ID = '634696227428-r4f5te4288o6mgmjbdors1qck93ahrv1.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = 'yAUxU8EOLmd2y4Cei2mDyeBC';
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: callbackUrl
   },
   function(_, __, profile, done) {
     let usuario = new UsuarioController.Usuario({
